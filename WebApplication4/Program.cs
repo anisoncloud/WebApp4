@@ -17,6 +17,7 @@ options.UseSqlServer(App4conn));
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<IProductService, ProductService>();
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 

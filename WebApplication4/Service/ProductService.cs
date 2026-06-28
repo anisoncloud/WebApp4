@@ -12,14 +12,24 @@ namespace WebApplication4.Service
             _uow = uow;
         }
 
-        public Task<ProductDto> AddProductAsync(ProductCreateDto dto)
+        public async Task<bool> AddProductAsync(ProductCreateDto dto)
         {
             var product = new Product
             {
                 Name = dto.Name,
                 Description = dto.Description,
-                ProductCategories = 
+            };
+            foreach (var catId in dto.CategoryIds.Distinct())
+            {
+                product.ProductCategories.Add(new ProductCategory
+                {
+                    CategoryId = catId,
+                    ProductId = product.Id
+                });
             }
+            await _uow.Products.AddAsync(product);
+            await _uow.CommitAsync();
+            return true;
         }
 
         public IQueryable<ProductDto> GetAllActiveProduct()

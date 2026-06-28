@@ -10,7 +10,7 @@ namespace WebApplication4.IService
         Task<IEnumerable<ProductDto>> GetAllProductWithCategoryAsync();
         IQueryable<ProductDto> GetAllProduct();
         IQueryable<ProductDto> GetAllActiveProduct();
-        Task<ProductDto> AddProductAsync(ProductCreateDto dto);
+        Task<bool> AddProductAsync(ProductCreateDto dto);
         
     }
 }
