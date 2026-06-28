@@ -19,19 +19,32 @@ namespace WebApplication4.Service
             await _uow.CommitAsync();
         }
 
-        public Task<IEnumerable<CategoryDto>> GetAllCategoriesAsync()
+        public async Task<IEnumerable<CategoryDto>> GetAllCategoriesAsync()
         {
-            throw new NotImplementedException();
+            var categories = await _uow.Categories.GetAllFromDbAsync();
+            return categories.ToCategoryListDto();
         }
 
-        public Task<CategoryDto?> GetCategoryByIdAsync(int id)
+        public async Task<CategoryDto?> GetCategoryByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            var category = await _uow.Categories.GetByIdAsync(id);
+            return category.ToCategoryDto();
         }
 
-        public Task<bool> UpdateCategoryAsync(int id, CategoryUpdateDto dto)
+        public async Task<bool> UpdateCategoryAsync(int id, CategoryUpdateDto dto)
         {
-            throw new NotImplementedException();
+            var category = await _uow.Categories.GetByIdAsync(id);
+            category.Name = dto.Name;
+            category.Description = dto.Description;
+            await _uow.Categories.UpdateAsync(category);
+            await _uow.CommitAsync();
+            return true;
+        }
+
+        public async Task<CategoryUpdateDto> GetCategoryForUpdate(int id)
+        {
+            var category = await _uow.Categories.GetByIdAsync(id);
+            return category.ToCategoryUpdateDto();
         }
     }
 }

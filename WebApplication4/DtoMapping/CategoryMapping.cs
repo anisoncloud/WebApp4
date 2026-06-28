@@ -14,11 +14,24 @@ namespace WebApplication4.DtoMapping
                 Description = category.Description,
             };
         }
+        public static IEnumerable<CategoryDto> ToCategoryListDto(this IEnumerable<Category> categories)
+        {
+            return categories.Select(category => category.ToCategoryDto());
+        }
 
         public static Category ToCategory(this CategoryCreateDto dto)
         {
             return new()
             {
+                Name = dto.Name,
+                Description = dto.Description,
+            };
+        }
+        public static CategoryUpdateDto ToCategoryUpdateDto(this Category dto)
+        {
+            return new()
+            {
+                
                 Name = dto.Name,
                 Description = dto.Description,
             };

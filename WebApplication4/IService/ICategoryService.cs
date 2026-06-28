@@ -8,5 +8,6 @@ namespace WebApplication4.IService
         Task<CategoryDto?> GetCategoryByIdAsync(int id);
         Task CreateCategoryAsync(CategoryCreateDto dto);
         Task<bool> UpdateCategoryAsync(int id, CategoryUpdateDto dto);
+        Task<CategoryUpdateDto> GetCategoryForUpdate(int id);
     }
 }

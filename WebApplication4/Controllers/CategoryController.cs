@@ -12,10 +12,10 @@ namespace WebApplication4.Controllers
             _categoryService = categoryService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-
-            return View();
+            var categories = await _categoryService.GetAllCategoriesAsync();
+            return View(categories);
         }
         [HttpGet]
         public IActionResult Create()
@@ -30,8 +30,24 @@ namespace WebApplication4.Controllers
                 return View(dto);
             }
             await _categoryService.CreateCategoryAsync(dto);
-            return RedirectToAction("Index");
-            
+            return RedirectToAction("Index");            
         }
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            var category = await _categoryService.GetCategoryForUpdate(id);
+            return View(category);
+        }
+        [HttpPost, ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, CategoryUpdateDto dto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(dto);
+            }
+            await _categoryService.UpdateCategoryAsync(id, dto);
+            return RedirectToAction("Index");
+        }
+
     }
 }
