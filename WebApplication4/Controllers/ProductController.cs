@@ -16,9 +16,10 @@ namespace WebApplication4.Controllers
             _productService = productService;
             _categoryService = categoryService;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var products = await _productService.GetAllActiveProductAsync();
+            return View(products);
         }
         [HttpGet]
         public async Task<IActionResult> Create()

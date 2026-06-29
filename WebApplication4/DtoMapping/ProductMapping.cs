@@ -15,5 +15,10 @@ namespace WebApplication4.DtoMapping
                 Categories = product.ProductCategories.Select(pc=>pc.Category.ToCategoryDto()).ToList()
             };
         }
+
+        public static IEnumerable<ProductDto> ToProductDtoList(this IEnumerable<Product> products)
+        {
+            return products.Select(p => ToProductDto(p));
+        }
     }
 }

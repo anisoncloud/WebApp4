@@ -10,12 +10,14 @@ namespace WebApplication4.Service
     {
         private readonly AppDbContext _context;
         public IRepository<Category> Categories { get; }
-        public IRepository<Product> Products { get; }
+        //public IRepository<Product> Products { get; }
+        public IProductRepository Products { get; }
         public UnitOfWork(AppDbContext context)
         {
             _context = context;
             Categories = new GenericRepository<Category>(context);
-            Products = new GenericRepository<Product>(context);
+            //Products = new GenericRepository<Product>(context);
+            Products = new ProductRepository(context);
         }       
 
         public async Task<int> CommitAsync()

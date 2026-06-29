@@ -1,4 +1,5 @@
 ﻿using WebApplication4.Dto;
+using WebApplication4.DtoMapping;
 using WebApplication4.IService;
 using WebApplication4.Models;
 
@@ -37,9 +38,10 @@ namespace WebApplication4.Service
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<ProductDto>> GetAllActiveProductAsync()
+        public async Task<IEnumerable<ProductDto>> GetAllActiveProductAsync()
         {
-            throw new NotImplementedException();
+            var products =  await _uow.Products.GetAllFromDbAsync();
+            return products.ToProductDtoList();
         }
 
         public Task<IEnumerable<ProductDto>> GetAllActiveProductWithCategoryAsync()
