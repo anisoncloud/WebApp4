@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using WebApplication4.Dto;
 using WebApplication4.DtoMapping;
 using WebApplication4.IService;
+using WebApplication4.ViewModels;
 
 namespace WebApplication4.Controllers
 {
@@ -31,6 +32,13 @@ namespace WebApplication4.Controllers
                 Text=c.Name,
             }).ToList();
             return View(vm);
+        }
+        [HttpPost, ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(ProductFormViewModel vm)
+        {
+            var dto = vm.ToProductCreateDto();
+            await _productService.AddProductAsync(dto);
+            return RedirectToAction("Index");
         }
     }
 }

@@ -15,5 +15,15 @@ namespace WebApplication4.DtoMapping
                 SelectedCategoryIds = dto.Categories.Select(c => c.Id).ToList()
             };
         }
+        public static ProductCreateDto ToProductCreateDto(this ProductFormViewModel vm)
+        {
+            return new()
+            {
+
+                Name = vm.Name,
+                Description = vm.Description,
+                CategoryIds = vm.SelectedCategoryIds
+            };
+        }
     }
 }
