@@ -6,6 +6,8 @@ namespace WebApplication4.IService
     {
         Task<IEnumerable<ProductDto>> GetAllActiveProductAsync();
         Task<ProductDto> GetProductByIdAsync(int id);
+        Task<ProductDto?> GetActiveProductByIdWithCategories(int id);
+        Task<ProductDto?> GetProductByIdWithCategories(int id);
         Task<IEnumerable<ProductDto>> GetAllActiveProductWithCategoryAsync();
         Task<IEnumerable<ProductDto>> GetAllProductWithCategoryAsync();
         IQueryable<ProductDto> GetAllProduct();

@@ -7,5 +7,7 @@ namespace WebApplication4.IRepository
     {
         Task<IEnumerable<Product>> GetAllActiveProductWithCategoriesAsync();
         Task<IEnumerable<Product>> GetAllProductWithCategoriesAsync();
+        Task<Product?> GetActiveByIdWithCategoryAsync(int id);
+        Task<Product?> GetByIdWithCategoriesAsync(int id);
     }
 }

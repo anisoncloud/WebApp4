@@ -41,5 +41,24 @@ namespace WebApplication4.Controllers
             await _productService.AddProductAsync(dto);
             return RedirectToAction("Index");
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            var dto = await _productService.GetActiveProductByIdWithCategories(id);
+            if (dto==null)
+            {
+                return NotFound();
+            }
+            var vm = dto.ToProductFormViewModel();
+            var categories = await _categoryService.GetAllCategoriesAsync();
+            vm.CategoryOptions = categories.Select(c => new SelectListItem
+            {
+                Value = c.Id.ToString(),
+                Text = c.Name,
+                Selected = vm.SelectedCategoryIds.Contains(id)
+            }).ToList();
+            return View(vm);
+        }
     }
 }

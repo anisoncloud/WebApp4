@@ -33,6 +33,12 @@ namespace WebApplication4.Service
             return true;
         }
 
+        public async Task<ProductDto?> GetActiveProductByIdWithCategories(int id)
+        {
+            var product = await _uow.Products.GetActiveByIdWithCategoryAsync(id);
+            return product.ToProductDto();
+        }
+
         public IQueryable<ProductDto> GetAllActiveProduct()
         {
             throw new NotImplementedException();
@@ -60,6 +66,11 @@ namespace WebApplication4.Service
         }
 
         public Task<ProductDto> GetProductByIdAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<ProductDto?> GetProductByIdWithCategories(int id)
         {
             throw new NotImplementedException();
         }
