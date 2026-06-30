@@ -60,5 +60,17 @@ namespace WebApplication4.Controllers
             }).ToList();
             return View(vm);
         }
+        [HttpPost, ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, ProductFormViewModel vm)
+        {
+            var categories = await _categoryService.GetAllCategoriesAsync();
+            vm.CategoryOptions = categories.Select(c => new SelectListItem
+            {
+                Value = c.Id.ToString(),
+                Text = c.Name,
+                Selected = vm.SelectedCategoryIds.Contains(c.Id)
+            }).ToList();
+            var dto = vm.ToUpdateDto();
+        }
     }
 }

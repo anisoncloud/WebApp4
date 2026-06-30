@@ -13,7 +13,11 @@ namespace WebApplication4.Repository
 
         public async Task<Product?> GetActiveByIdWithCategoryAsync(int id )
         {
-            return await _dbSet.Where(x=>x.IsDeleted==false).Include(x=>x.ProductCategories).FirstOrDefaultAsync(x=>x.Id==id);
+            return await _dbSet
+                .Where(x=>x.IsDeleted==false)
+                .Include(x=>x.ProductCategories)
+                .ThenInclude(x=>x.Category)
+                .FirstOrDefaultAsync(x=>x.Id==id);
         }
 
         public async Task<IEnumerable<Product>> GetAllActiveProductWithCategoriesAsync()

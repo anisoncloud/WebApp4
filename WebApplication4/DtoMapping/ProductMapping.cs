@@ -12,7 +12,7 @@ namespace WebApplication4.DtoMapping
                 Id = product.Id,
                 Name = product.Name,
                 Description = product.Description,
-                Categories = product.ProductCategories.Select(pc=>pc.Category.ToCategoryDto()).ToList()
+                Categories = product.ProductCategories.Select(pc=>pc.Category.ToCategoryDto()).ToList()??new List<CategoryDto>()
             };
         }
 

@@ -25,5 +25,14 @@ namespace WebApplication4.DtoMapping
                 CategoryIds = vm.SelectedCategoryIds
             };
         }
+        public static ProductUpdateDto ToUpdateDto(this ProductFormViewModel vm)
+        {
+            return new()
+            {
+                Name = vm.Name,
+                Description = vm.Description,
+                CategoryIds = vm.SelectedCategoryIds
+            };
+        }
     }
 }
